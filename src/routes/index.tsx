@@ -37,11 +37,12 @@ function Index() {
       <section className="relative overflow-hidden bg-[#0b1220] dark:bg-[#0a1118]">
         <video
           src={heroVideo.url}
+          poster="/favicon.png"
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover opacity-90 dark:opacity-95"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#0b1220]/60 via-[#0b1220]/35 to-primary/25 dark:from-[#06090f]/55 dark:via-[#06090f]/25 dark:to-transparent" />
