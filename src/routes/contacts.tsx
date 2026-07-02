@@ -19,8 +19,17 @@ export const Route = createFileRoute("/contacts")({
   component: ContactsPage,
 });
 
+function genCaptcha() {
+  const a = Math.floor(Math.random() * 8) + 2;
+  const b = Math.floor(Math.random() * 8) + 2;
+  return { a, b, answer: a + b };
+}
+
 function ContactsPage() {
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err" | "captcha">("idle");
+  const [captcha, setCaptcha] = useState(genCaptcha);
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [startTime] = useState(() => Date.now());
   return (
     <PageShell title="Контакты" subtitle="Свяжитесь с нами удобным способом — ответим в течение 30 минут в рабочее время." crumbs={[{ label: "Контакты" }]}>
       <div className="container mx-auto px-6 py-14 grid lg:grid-cols-2 gap-10">
@@ -47,7 +56,19 @@ function ContactsPage() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            const fd = new FormData(e.currentTarget);
+            const form = e.currentTarget;
+            const fd = new FormData(form);
+            // honeypot
+            if (String(fd.get("website") || "")) return;
+            // time trap - bots submit too fast
+            if (Date.now() - startTime < 2000) { setStatus("captcha"); return; }
+            // captcha check
+            if (Number(captchaInput) !== captcha.answer) {
+              setStatus("captcha");
+              setCaptcha(genCaptcha());
+              setCaptchaInput("");
+              return;
+            }
             const name = String(fd.get("name") || "");
             const phone = String(fd.get("phone") || "");
             const email = String(fd.get("email") || "");
@@ -62,7 +83,9 @@ function ContactsPage() {
               });
               if (!res.ok) throw new Error();
               setStatus("ok");
-              (e.target as HTMLFormElement).reset();
+              form.reset();
+              setCaptcha(genCaptcha());
+              setCaptchaInput("");
             } catch {
               setStatus("err");
             }
@@ -74,10 +97,28 @@ function ContactsPage() {
           <input name="phone" required type="tel" placeholder="Телефон" className="w-full h-11 px-4 rounded-lg border border-border bg-background outline-none focus:border-primary" />
           <input name="email" type="email" placeholder="Email" className="w-full h-11 px-4 rounded-lg border border-border bg-background outline-none focus:border-primary" />
           <textarea name="message" rows={4} placeholder="Сообщение" className="w-full p-4 rounded-lg border border-border bg-background outline-none focus:border-primary" />
+          {/* honeypot */}
+          <input name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+          <div className="flex items-center gap-3">
+            <div className="flex-1 px-4 h-11 rounded-lg bg-muted flex items-center font-mono text-sm select-none">
+              Проверка: <span className="ml-2 font-bold">{captcha.a} + {captcha.b} = ?</span>
+            </div>
+            <input
+              required
+              type="number"
+              inputMode="numeric"
+              value={captchaInput}
+              onChange={(e) => setCaptchaInput(e.target.value)}
+              placeholder="Ответ"
+              className="w-24 h-11 px-3 rounded-lg border border-border bg-background outline-none focus:border-primary text-center"
+              aria-label="Ответ на проверку"
+            />
+          </div>
           <Button type="submit" size="lg" className="w-full" disabled={status === "sending"}>
             {status === "sending" ? "Отправка…" : "Отправить"}
           </Button>
           {status === "ok" && <p className="text-sm text-green-600 text-center">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>}
+          {status === "captcha" && <p className="text-sm text-destructive text-center">Неверный ответ на проверку. Попробуйте ещё раз.</p>}
           {status === "err" && <p className="text-sm text-destructive text-center">Не удалось отправить. Позвоните нам: {SITE.phone}</p>}
           <p className="text-xs text-muted-foreground text-center">Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.</p>
         </form>
