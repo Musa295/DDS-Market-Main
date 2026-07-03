@@ -15,6 +15,9 @@ export const Route = createFileRoute("/contacts")({
     { property: "og:title", content: "Контакты — Digital Dentistry Solutions" },
     { property: "og:description", content: "Адрес офиса в Москве, телефон, email, Telegram, WhatsApp, MAX." },
     { property: "og:url", content: "https://ddsmarket.ru/contacts" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Контакты — Digital Dentistry Solutions" },
+      { name: "twitter:description", content: "Адрес офиса в Москве, телефон, email, Telegram, WhatsApp, MAX." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/contacts" }]}),
   component: ContactsPage,
 });

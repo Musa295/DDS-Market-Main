@@ -16,6 +16,9 @@ export const Route = createFileRoute("/promo")({
     { property: "og:title", content: "Акции и спецпредложения — DDS MARKET" },
     { property: "og:description", content: "Актуальные акции и спецпредложения на стоматологическое оборудование и расходные материалы." },
     { property: "og:url", content: "https://ddsmarket.ru/promo" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Акции и спецпредложения — DDS MARKET" },
+      { name: "twitter:description", content: "Актуальные акции и спецпредложения на стоматологическое оборудование и расходные материалы." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/promo" }]}),
   component: () => (
     <PageShell title="Акции и спецпредложения" subtitle="Скидки и бонусы для постоянных клиентов." crumbs={[{ label: "Акции" }]}>

@@ -9,6 +9,9 @@ export const Route = createFileRoute("/laboratory")({
     { property: "og:title", content: "Зуботехническая лаборатория — DDS MARKET" },
     { property: "og:description", content: "Цифровая зуботехническая лаборатория в Москве: коронки, виниры, импланты, бюгели, элайнеры." },
     { property: "og:url", content: "https://ddsmarket.ru/laboratory" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Зуботехническая лаборатория — DDS MARKET" },
+      { name: "twitter:description", content: "Цифровая зуботехническая лаборатория в Москве: коронки, виниры, импланты, бюгели, элайнеры." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/laboratory" }]}),
   component: () => (
     <PageShell title="Зуботехническая лаборатория" subtitle="Полный цикл цифрового и классического зубопротезирования. Работаем по защищённым каналам с клиниками по всей России." crumbs={[{ label: "Лаборатория" }]}>

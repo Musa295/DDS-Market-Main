@@ -10,6 +10,9 @@ export const Route = createFileRoute("/delivery")({
     { property: "og:title", content: "Доставка и оплата — DDS MARKET" },
     { property: "og:description", content: "Самовывоз со склада в Москве и доставка по всей России. Оплата наличными, переводом, лизинг." },
     { property: "og:url", content: "https://ddsmarket.ru/delivery" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Доставка и оплата — DDS MARKET" },
+      { name: "twitter:description", content: "Самовывоз со склада в Москве и доставка по всей России. Оплата наличными, переводом, лизинг." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/delivery" }]}),
   component: () => (
     <PageShell title="Доставка и оплата" subtitle="Самовывоз со склада в Москве или доставка транспортными компаниями по всей России." crumbs={[{ label: "Доставка" }]}>
