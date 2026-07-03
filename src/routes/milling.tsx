@@ -10,6 +10,9 @@ export const Route = createFileRoute("/milling")({
     { property: "og:title", content: "Фрезерный центр — DDS MARKET Москва" },
     { property: "og:description", content: "Собственный фрезерный центр в Москве: каркасы из циркония, диоксида кремния, PMMA, титана." },
     { property: "og:url", content: "https://ddsmarket.ru/milling" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Фрезерный центр — DDS MARKET Москва" },
+      { name: "twitter:description", content: "Собственный фрезерный центр в Москве: каркасы из циркония, диоксида кремния, PMMA, титана." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/milling" }]}),
   component: () => (
     <PageShell title="Фрезерный центр" subtitle="Изготовление каркасов и реставраций на 5-осевом оборудовании VHF и Roland. Приём STL по защищённым каналам." crumbs={[{ label: "Фрезерный центр" }]}>

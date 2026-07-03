@@ -11,6 +11,9 @@ export const Route = createFileRoute("/services")({
     { property: "og:title", content: "Услуги — Digital Dentistry Solutions" },
     { property: "og:description", content: "Подбор оборудования, поставка, монтаж, обучение и сервисное обслуживание." },
     { property: "og:url", content: "https://ddsmarket.ru/services" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Услуги — Digital Dentistry Solutions" },
+      { name: "twitter:description", content: "Подбор оборудования, поставка, монтаж, обучение и сервисное обслуживание." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/services" }]}),
   component: () => (
     <PageShell title="Услуги" subtitle="Полный спектр услуг по оснащению и сопровождению стоматологических клиник и лабораторий." crumbs={[{ label: "Услуги" }]}>

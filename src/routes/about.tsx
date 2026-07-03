@@ -10,6 +10,9 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "О компании — DDS MARKET" },
       { property: "og:description", content: "Комплексные поставки оборудования для фрезерных центров и зуботехнических лабораторий." },
       { property: "og:url", content: "https://ddsmarket.ru/about" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "О компании — DDS MARKET" },
+      { name: "twitter:description", content: "Комплексные поставки оборудования для фрезерных центров и зуботехнических лабораторий." },
     ],
     links: [{ rel: "canonical", href: "https://ddsmarket.ru/about" }],
   }),
@@ -30,7 +33,7 @@ const SUPPLY = [
   {
     icon: FlaskConical,
     title: "Традиционное зуботехническое оборудование",
-    text: "Печи для синтеризации и обжига керамики, литейные установки, полимеризаторы, пескоструйные аппараты, микромоторы.",
+    text: "Печи для синтеризации и обжига, литейные установки, полимеризаторы, пескоструйные аппараты, микромоторы.",
   },
   {
     icon: Wrench,
