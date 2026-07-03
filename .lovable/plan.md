@@ -1,29 +1,79 @@
-## Диагноз
+## 1. Favicon — только логотип, без надписей
 
-Проверил живое превью: `/favicon.ico` и `/hero-video.mp4` реально отдаются со статусом 200, у `<video>` `readyState = 4` (полностью загружен и играет). Значит проблема не в загрузке, а в отображении.
+Сейчас в `public/favicon.*` лежит полный логотип с текстом «DDS MARKET» — на 16–48 px это превращается в кашу, и Google показывает дефолтный «глобус».
 
-**Favicon.** В Lovable-превью вкладка браузера показывает favicon внешнего сайта (`lovable.app`), а не iframe с вашим сайтом. Ваша иконка появится только после публикации при открытии `*.lovable.app` / `ddsmarket.ru` напрямую. Файлы и `<link>` теги на месте, менять ничего не нужно.
+- Сгенерирую квадратный фавикон-марку **только из символа/значка логотипа** (без текста), на белом фоне с небольшим отступом.
+- Размеры: `favicon.ico` (32×32), `favicon-32.png`, `favicon-16.png`, `favicon.png` 96×96 (то, что предпочитает Google), `apple-touch-icon.png` 180×180.
+- В `src/routes/__root.tsx` оставлю чистый набор без `?v=` и дубликатов:
+  ```
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  ```
+- Google обновит иконку в выдаче через 1–4 недели после переобхода. Ускорить можно только через Search Console → «Проверка URL → Запросить индексирование».
 
-**Видео.** Проигрывается, но сверху лежат три слоя, съедающие картинку:
-- `<video>` c `opacity: 0.5` (в тёмной теме 0.7)
-- Градиент `from-[#0b1220]/85 via-[#0b1220]/65 to-primary/50`
-- Слой `bg-mesh opacity-10`
+Уточнение: если у логотипа нет отдельного «значка без текста», я вырежу центральный графический элемент из `src/assets/logo.png`. Если хочешь — могу сгенерировать новую монограмму (например, «DDS» в круге фирменного цвета) — скажи, если этот вариант предпочтительнее.
 
-Итог — движение почти незаметно, кадр выглядит статичным тёмно-синим фоном.
+## 2. Sitemap.xml и robots.txt
 
-## Что сделаю
+Оба файла уже существуют (`public/sitemap.xml`, `public/robots.txt`) — не буду мигрировать на server-route, только обновлю содержимое:
+- **sitemap.xml**: пересоберу список URL точно по актуальным маршрутам и товарам из `data.ts` (уберу скрытые `hidden: true`, добавлю недостающие), обновлю `lastmod` на сегодня, добавлю `changefreq`.
+- **robots.txt**: оставлю `Allow: /`, `Disallow: /api/`, ссылку на `sitemap.xml`, добавлю блок `User-agent: Googlebot-Image Allow: /` и уберу возможные лишние.
 
-Правлю только hero-секцию в `src/routes/index.tsx`:
+## 3. Open Graph / Twitter Card / canonical на всех страницах
 
-1. Поднимаю прозрачность видео: `opacity-50 dark:opacity-70` → `opacity-90 dark:opacity-95`.
-2. Ослабляю верхний градиент, чтобы контент был читаем, но кадр видно:
-   - светлая тема: `from-[#0b1220]/60 via-[#0b1220]/35 to-primary/25`
-   - тёмная: `from-[#06090f]/55 via-[#06090f]/25 to-transparent`
-3. Оставляю тень текста (`drop-shadow`) — заголовок и подзаголовок останутся читаемыми поверх более яркого фона.
-4. Слой `bg-mesh` оставляю без изменений (он и так opacity-10).
+Пройду по всем маршрутам (`about`, `contacts`, `delivery`, `laboratory`, `milling`, `promo`, `services`, `catalog.index`, `catalog.$slug`, `index`) и приведу `head()` к единому шаблону:
+- `title`, `description`
+- `og:title`, `og:description`, `og:type`, `og:url`, `og:locale=ru_RU`
+- `twitter:card=summary_large_image`, `twitter:title`, `twitter:description`
+- `<link rel="canonical" href="https://ddsmarket.ru/...">` — только на leaf-роуте, не в `__root`.
+- Для карточек товара — динамический canonical/og:url со slug'ом и JSON-LD `Product`.
 
-Ничего в `data.ts`, роутере, шапке/подвале не трогаю.
+`og:image` пока не ставлю (нет качественной обложки под share-preview) — можно добавить позже, если сгенерируем 1200×630.
 
-## Про favicon — что сказать в ответе
+## 4. Оптимизация изображений и скорости
 
-Кратко объясняю, что в превью Lovable иконка вашего сайта не может показаться по определению (iframe), и что после публикации она сразу подхватится (файлы уже настроены с `?v=3` cache-buster).
+- Подключу `vite-imagetools` в `vite.config.ts`. Для тяжёлых `.jpg/.png` в `src/assets/products/*` буду импортировать как `?format=webp;avif;jpg&as=picture` и рендерить через `<picture>` в карточке товара и галерее.
+- Ко всем `<img>` в каталоге, карточке товара, категориях и главной добавлю явные `width`/`height` (или `aspect-ratio` через контейнер уже есть) + `loading="lazy"` (у первого экрана — `loading="eager" fetchpriority="high"`).
+- Hero-видео: добавлю `poster` (лёгкий webp), уже стоит `preload="metadata"`.
+- Preload LCP-изображения главной страницы через `head().links` роута `/`.
+- Уберу неиспользуемые импорты, где найду.
+
+## 5. Правки контента (data.ts)
+
+**5.1. `xtcera-x-mill-500-se`** — заменю поле `description` (и `short` при необходимости) на новый уникальный текст, который ты прислал, с маркированным списком «Особенности».
+
+**5.2. `xtcera-x-mill-500-plus`** — вычищу все упоминания «cadcamgo» из `description`/`short`/`features`; выставлю `price: "1 390 000 ₽"`.
+
+**5.3. `dust-collector-srefo-r407`** — `price: "92 000 ₽"` (уточни: 92 000 ₽ или именно «92»? Предполагаю 92 000 ₽ по аналогии с R-412).
+
+**5.4. `dust-collector-srefo-r412`** — `price: "77 000 ₽"`.
+
+**5.5. Категория «Печи спекания и обжига керамики» → «Печи для синтеризации и обжига»**
+- Переименую в массиве `CATEGORIES` и во всех товарах (`category: "..."`), а также в `CATEGORY_ICONS` на главной.
+
+**5.6. `zetin-ztcf-30b-sic`** — заменю `description` на новый текст с блоками «Особенности» и «Ключевые преимущества», категорию — на новую.
+
+## 6. Что попрошу сделать вручную
+
+- В DNS/хостинге настроить 301-редирект `www.ddsmarket.ru → ddsmarket.ru` (в выдаче Google сейчас `www.` — сигналы делятся между двумя хостами).
+- В Google Search Console: добавить оба свойства, отправить главную на переобход.
+
+## Файлы, которые изменю
+
+- `public/favicon.ico`, `public/favicon.png`, `public/favicon-16.png`, `public/favicon-32.png`, `public/apple-touch-icon.png`
+- `public/sitemap.xml`, `public/robots.txt`
+- `src/routes/__root.tsx` (head links)
+- `src/routes/index.tsx`, `about.tsx`, `contacts.tsx`, `delivery.tsx`, `laboratory.tsx`, `milling.tsx`, `promo.tsx`, `services.tsx`, `catalog.index.tsx`, `catalog.$slug.tsx` (OG/Twitter/canonical/JSON-LD)
+- `src/components/site/data.ts` (тексты, цены, категория)
+- `vite.config.ts` (+ `vite-imagetools`)
+- Карточка товара и галерея в `catalog.index.tsx` / `catalog.$slug.tsx` (переход на `<picture>` + width/height/lazy)
+
+## Один вопрос перед стартом
+
+Насчёт favicon: у тебя `logo.png` — это лого с текстом «DDS MARKET». Что вырезать в квадратную иконку?
+— **A)** Центральный графический значок из существующего лого (если он есть).
+— **B)** Сгенерировать новую монограмму «DDS» в фирменном цвете на белом фоне.
+— **C)** Использовать просто «D» в круге.
+
+Скажи букву — и я запускаю всё выше одним заходом.
