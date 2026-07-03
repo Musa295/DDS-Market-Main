@@ -230,7 +230,7 @@ export const CATEGORIES = [
   "3D-принтеры",
   "3D-сканеры",
   "Вытяжки для станков",
-  "Печи спекания и обжига керамики",
+  "Печи для синтеризации и обжига",
   "Пароструйные аппараты",
   "Фотополимерные смолы",
   "Аппараты для анодирования",
@@ -1079,11 +1079,11 @@ export const PRODUCTS: Product[] = [
     sku: "1330",
   },
 
-  // ===== Печи спекания и обжига керамики =====
+  // ===== Печи для синтеризации и обжига =====
   {
     slug: "zetin-ztcf-20b",
     name: "Zetin ZTCF-20B",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Zetin",
     price: "210 000 ₽",
     short: "Печь для обжига керамики Zetin ZTCF-20B. Базовая модель линейки — детальные характеристики уточняются по паспорту поставщика.",
@@ -1112,7 +1112,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "zetin-ztcf-20b-pro",
     name: "Zetin ZTCF-20B Pro",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Zetin",
     price: "220 000 ₽",
     short: "Печь обжига керамики Zetin ZTCF-20B Pro: до 1300 °C, нагрев ≤140 °C/мин, 100 программ (до 500), вакуум −98 кПа, проволока Kanthal.",
@@ -1154,7 +1154,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "zetin-ztcf-30b-plus",
     name: "Zetin ZTCF-30B Plus",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Zetin",
     price: "380 000 ₽",
     short: "Печь синтеризации циркония Zetin ZTCF-30B Plus: до 1730 °C, MoSi₂-нагреватели, камера 110×110×120 мм, до 150 единиц за цикл, 40 программ.",
@@ -1198,7 +1198,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "zetin-ztcf-30b-sic",
     name: "Zetin ZTCF-30B SiC",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Zetin",
     price: "430 000 ₽",
     short: "Печь синтеризации циркония Zetin ZTCF-30B SiC с SiC-нагревателями. Детальные характеристики уточняются по паспорту поставщика.",
@@ -1226,7 +1226,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "zetin-ztcf-30b-cs",
     name: "Zetin ZTCF-30B CS",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Zetin",
     price: "395 000 ₽",
     short: "Компактная печь сверхбыстрой синтеризации циркония Zetin ZTCF-30B CS: до 1750 °C, цикл от 1 часа, до 60 единиц, точность ±1 °C, 40 программ.",
@@ -1272,7 +1272,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "upcera-vicce-gt1",
     name: "Vicce GT1",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Vicce",
     price: "370 000 ₽",
     short: "Скоростная печь Vicce GT1 для спекания циркония. Детальные характеристики уточняются по паспорту поставщика.",
@@ -1301,7 +1301,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "upcera-vicce-gt1-pro",
     name: "Vicce GT1 Pro",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Vicce",
     price: "390 000 ₽",
     short: "Скоростная печь Vicce GT1 Pro для спекания циркония. Усовершенствованная Pro-версия, характеристики уточняются по паспорту поставщика.",
@@ -1331,7 +1331,7 @@ export const PRODUCTS: Product[] = [
     slug: "upcera-vicce-a7-plus",
     hidden: true,
     name: "Vicce A7+",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Vicce",
     price: "180 000 ₽",
     short: "Печь для обжига керамики Vicce A7+. Детальные характеристики уточняются по паспорту поставщика — параметры A7Pro не переносятся.",
@@ -1360,7 +1360,7 @@ export const PRODUCTS: Product[] = [
   {
     slug: "upcera-vicce-a7-pro",
     name: "Vicce A7Pro",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Vicce",
     price: "200 000 ₽",
     short: "Печь обжига керамики Vicce A7Pro с насосом 550D: до 1150 °C, вакуум <30 мм рт.ст., 200 Вт насос, габариты 33 × 42 × 56 см, 24,6 кг.",
@@ -1406,7 +1406,7 @@ export const PRODUCTS: Product[] = [
     slug: "vicce-ttf",
     hidden: true,
     name: "Vicce TTF",
-    category: "Печи спекания и обжига керамики",
+    category: "Печи для синтеризации и обжига",
     brand: "Vicce",
     price: "450 000 ₽",
     short: "Печь синтеризации циркония Vicce TTF: 3000 Вт, 200 программ, PID-контроль температуры, габариты 39 × 54,6 × 83 см, IP21.",

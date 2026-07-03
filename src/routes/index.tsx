@@ -22,7 +22,7 @@ const CATEGORY_ICONS: Record<string, typeof Cog> = {
   "3D-принтеры": Printer,
   "3D-сканеры": ScanLine,
   "Вытяжки для станков": Wind,
-  "Печи спекания и обжига керамики": Flame,
+  "Печи для синтеризации и обжига": Flame,
   "Фотополимерные смолы": FlaskConical,
   "Аппараты для анодирования": Zap,
   "Расходные материалы": Package,
