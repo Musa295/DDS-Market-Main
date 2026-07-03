@@ -2,4 +2,10 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
 Sitemap: https://ddsmarket.ru/sitemap.xml
