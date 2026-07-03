@@ -11,7 +11,16 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Digital Dentistry Solutions — Стоматологическое оборудование в Москве" },
       { name: "description", content: "Поставка цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи. Монтаж, обучение, сервис." },
+      { property: "og:title", content: "Digital Dentistry Solutions — Стоматологическое оборудование в Москве" },
+      { property: "og:description", content: "Поставка цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи. Монтаж, обучение, сервис." },
+      { property: "og:url", content: "https://ddsmarket.ru/" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "ru_RU" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Digital Dentistry Solutions — Стоматологическое оборудование в Москве" },
+      { name: "twitter:description", content: "Поставка цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи." },
     ],
+    links: [{ rel: "canonical", href: "https://ddsmarket.ru/" }],
   }),
   component: Index,
 });
