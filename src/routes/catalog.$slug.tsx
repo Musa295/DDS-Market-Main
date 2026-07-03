@@ -11,12 +11,39 @@ export const Route = createFileRoute("/catalog/$slug")({
     if (!product) throw notFound();
     return { product };
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.product.name} — DDS MARKET` },
-      { name: "description", content: loaderData?.product.short ?? "" },
-    ],
-  }),
+  head: ({ loaderData, params }) => {
+    const p = loaderData?.product;
+    const url = `https://ddsmarket.ru/catalog/${params.slug}`;
+    const title = p ? `${p.name} — DDS MARKET` : "Товар — DDS MARKET";
+    const desc = p?.short ?? "";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: desc },
+        { property: "og:type", content: "product" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:url", content: url },
+        { property: "og:locale", content: "ru_RU" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: desc },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: p ? [{
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: p.name,
+          description: p.short,
+          brand: { "@type": "Brand", name: p.brand },
+          category: p.category,
+          offers: { "@type": "Offer", priceCurrency: "RUB", price: (p.price || "").replace(/[^\d]/g, "") || undefined, availability: "https://schema.org/InStock", url },
+        }),
+      }] : [],
+    };
+  },
   notFoundComponent: () => (
     <PageShell title="Товар не найден" crumbs={[{ label: "Каталог", to: "/catalog" }, { label: "Не найден" }]}>
       <div className="container mx-auto px-6 py-20 text-center">
