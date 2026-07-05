@@ -9,18 +9,18 @@ const heroVideo = { url: "/hero-video.mp4" };
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Digital Dentistry Solutions — Стоматологическое оборудование в Москве" },
-      { name: "description", content: "Поставка цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи. Монтаж, обучение, сервис." },
-      { property: "og:title", content: "Digital Dentistry Solutions — Стоматологическое оборудование в Москве" },
-      { property: "og:description", content: "Поставка цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи. Монтаж, обучение, сервис." },
-      { property: "og:url", content: "https://ddsmarket.ru/" },
+      { title: "DDS MARKET — Цифровое стоматологическое оборудование | CAD/CAM, интраоральные сканеры, фрезерные станки" },
+      { name: "description", content: "DDS MARKET — поставщик цифрового стоматологического оборудования. Интраоральные сканеры, CAD/CAM системы, фрезерные станки, печи синтеризации, 3D-принтеры, обучение и сервис по всей России." },
+      { property: "og:title", content: "DDS MARKET — Цифровое стоматологическое оборудование | CAD/CAM, интраоральные сканеры, фрезерные станки" },
+      { property: "og:description", content: "DDS MARKET — поставщик цифрового стоматологического оборудования. Интраоральные сканеры, CAD/CAM системы, фрезерные станки, печи синтеризации, 3D-принтеры, обучение и сервис по всей России." },
+      { property: "og:url", content: "https://www.ddsmarket.ru/" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "ru_RU" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Digital Dentistry Solutions — Стоматологическое оборудование в Москве" },
-      { name: "twitter:description", content: "Поставка цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи." },
+      { name: "twitter:title", content: "DDS MARKET — Цифровое стоматологическое оборудование" },
+      { name: "twitter:description", content: "Интраоральные сканеры, CAD/CAM системы, фрезерные станки, печи синтеризации, 3D-принтеры, обучение и сервис по всей России." },
     ],
-    links: [{ rel: "canonical", href: "https://ddsmarket.ru/" }],
+    links: [{ rel: "canonical", href: "https://www.ddsmarket.ru/" }],
   }),
   component: Index,
 });
@@ -46,7 +46,7 @@ function Index() {
       <section className="relative overflow-hidden bg-[#0b1220] dark:bg-[#0a1118]">
         <video
           src={heroVideo.url}
-          poster="/favicon.png"
+          aria-label="DDS Market — цифровое стоматологическое оборудование"
           autoPlay
           muted
           loop
