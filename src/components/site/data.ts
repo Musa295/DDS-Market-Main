@@ -41,7 +41,7 @@ import denparkZ9_3 from "@/assets/products/denpark-z9-3.webp";
 import srefoR407_1 from "@/assets/products/srefo-r407-1.webp";
 import srefoR407_2 from "@/assets/products/srefo-r407-2.webp";
 import srefoR407_3 from "@/assets/products/srefo-r407-3.webp";
-import srefoR407_4 from "@/assets/products/srefo-r407-4.webp";
+// srefo-r407-4 image removed from R-407 gallery per client request
 import srefoR407_5 from "@/assets/products/srefo-r407-5.webp";
 import srefoE402_1 from "@/assets/products/srefo-e402-1.webp";
 import srefoE402_2 from "@/assets/products/srefo-e402-2.webp";
