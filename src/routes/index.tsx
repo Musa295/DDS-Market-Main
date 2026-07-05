@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "DDS MARKET — Цифровое стоматологическое оборудование" },
       { name: "twitter:description", content: "Интраоральные сканеры, CAD/CAM системы, фрезерные станки, печи синтеризации, 3D-принтеры, обучение и сервис по всей России." },
     ],
-    links: [{ rel: "canonical", href: "https://ddsmarket.ru/" }],
+    links: [{ rel: "canonical", href: "https://www.ddsmarket.ru/" }],
   }),
   component: Index,
 });
