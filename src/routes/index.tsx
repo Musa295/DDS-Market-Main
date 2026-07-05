@@ -46,7 +46,7 @@ function Index() {
       <section className="relative overflow-hidden bg-[#0b1220] dark:bg-[#0a1118]">
         <video
           src={heroVideo.url}
-          poster="/favicon.png"
+          aria-label="DDS Market — цифровое стоматологическое оборудование"
           autoPlay
           muted
           loop
