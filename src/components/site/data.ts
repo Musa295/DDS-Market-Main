@@ -851,7 +851,6 @@ export const PRODUCTS: Product[] = [
  specs: [
  { label: "Тип", value: "Лабораторный 3D-сканер" },
  { label: "Назначение", value: "Оцифровка гипсовых моделей и слепков" },
- { label: "Статус по характеристикам", value: "Уточняется по паспорту поставщика" },
  ],
  sku: "1323",
  inStock: true,
@@ -1106,7 +1105,6 @@ export const PRODUCTS: Product[] = [
  specs: [
  { label: "Тип", value: "Печь для обжига керамики" },
  { label: "Линейка", value: "Zetin ZTCF" },
- { label: "Статус по характеристикам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1226,7 +1224,6 @@ export const PRODUCTS: Product[] = [
  specs: [
  { label: "Тип", value: "Печь для синтеризации циркония" },
  { label: "Нагревательный элемент", value: "Карбид кремния (SiC)" },
- { label: "Статус по характеристикам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1300,7 +1297,6 @@ export const PRODUCTS: Product[] = [
  specs: [
  { label: "Тип", value: "Печь для спекания циркония" },
  { label: "Платформа", value: "Vicce GT1" },
- { label: "Статус по характеристикам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1328,7 +1324,6 @@ export const PRODUCTS: Product[] = [
  specs: [
  { label: "Тип", value: "Печь для спекания циркония" },
  { label: "Платформа", value: "Vicce GT1 Pro" },
- { label: "Статус по характеристикам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1356,7 +1351,6 @@ export const PRODUCTS: Product[] = [
  specs: [
  { label: "Тип", value: "Печь для обжига керамики" },
  { label: "Платформа", value: "Vicce A7" },
- { label: "Статус по характеристикам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1520,7 +1514,6 @@ export const PRODUCTS: Product[] = [
  { label: "Цвет/назначение", value: "Orange — модели с высокой контрастностью" },
  { label: "Длина волны", value: "405 нм" },
  { label: "Объём", value: "1 кг / 2,5 кг" },
- { label: "Статус по TDS", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1549,7 +1542,6 @@ export const PRODUCTS: Product[] = [
  { label: "Серия", value: "Model XE — высокоточная" },
  { label: "Длина волны", value: "405 нм" },
  { label: "Объём", value: "1 кг" },
- { label: "Статус по TDS", value: "Уточняется по паспорту поставщика" },
  ],
  },
 
@@ -1810,7 +1802,6 @@ export const PRODUCTS: Product[] = [
  { label: "Линейка", value: "Yucera Zirconia" },
  { label: "Размер", value: "Ø98 мм" },
  { label: "Толщины", value: "10–25 мм" },
- { label: "Статус по TDS", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1851,7 +1842,6 @@ export const PRODUCTS: Product[] = [
  { label: "Производитель", value: "XTCERA" },
  { label: "Размер", value: "Ø98 мм" },
  { label: "Толщины", value: "10–25 мм" },
- { label: "Статус по TDS", value: "Уточняется по паспорту поставщика" },
  ],
  },
  // Титановые диски
@@ -1894,7 +1884,6 @@ export const PRODUCTS: Product[] = [
  { label: "Форм-фактор", value: "Диск" },
  { label: "Размер", value: "Ø98 мм" },
  { label: "Толщины", value: "10–25 мм" },
- { label: "Статус по сертификатам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -1936,7 +1925,6 @@ export const PRODUCTS: Product[] = [
  { label: "Форм-фактор", value: "Квадратный блок" },
  { label: "Размер", value: "140 × 150 мм" },
  { label: "Толщины", value: "10–25 мм" },
- { label: "Статус по сертификатам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  // PMMA и воск
@@ -2171,7 +2159,6 @@ export const PRODUCTS: Product[] = [
  { label: "Форма частиц", value: "Сферические" },
  { label: "Назначение", value: "SLM-печать (ЛСП)" },
  { label: "Совместимость", value: "FastForm DeskFab X1 и др. SLM-принтеры" },
- { label: "Статус по сертификатам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  {
@@ -2203,7 +2190,6 @@ export const PRODUCTS: Product[] = [
  { label: "Форма частиц", value: "Сферические" },
  { label: "Назначение", value: "SLM-печать (ЛСП)" },
  { label: "Совместимость", value: "FastForm DeskFab X1 и др. SLM-принтеры" },
- { label: "Статус по сертификатам", value: "Уточняется по паспорту поставщика" },
  ],
  },
  // Ванночки и плёнки
