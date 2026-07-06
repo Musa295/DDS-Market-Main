@@ -1,79 +1,51 @@
-## 1. Favicon — только логотип, без надписей
+## Что происходит
 
-Сейчас в `public/favicon.*` лежит полный логотип с текстом «DDS MARKET» — на 16–48 px это превращается в кашу, и Google показывает дефолтный «глобус».
+Vercel собирает ветку `vercel/install-vercel-speed-insights-sammzv` (авто‑PR от Vercel‑бота с добавлением Speed Insights). Билд падает:
 
-- Сгенерирую квадратный фавикон-марку **только из символа/значка логотипа** (без текста), на белом фоне с небольшим отступом.
-- Размеры: `favicon.ico` (32×32), `favicon-32.png`, `favicon-16.png`, `favicon.png` 96×96 (то, что предпочитает Google), `apple-touch-icon.png` 180×180.
-- В `src/routes/__root.tsx` оставлю чистый набор без `?v=` и дубликатов:
-  ```
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  ```
-- Google обновит иконку в выдаче через 1–4 недели после переобхода. Ускорить можно только через Search Console → «Проверка URL → Запросить индексирование».
+```
+[vite]: Rollup failed to resolve import "@tanstack/query-core"
+from ".../@tanstack/react-query/build/modern/index.js"
+```
 
-Уточнение: если у логотипа нет отдельного «значка без текста», я вырежу центральный графический элемент из `src/assets/logo.png`. Если хочешь — могу сгенерировать новую монограмму (например, «DDS» в круге фирменного цвета) — скажи, если этот вариант предпочтительнее.
+Две причины сразу:
 
-## 2. Sitemap.xml и robots.txt
+1. На этой ветке `package.json` не содержит явной зависимости `@tanstack/query-core` (в логах установленных пакетов её нет). У нас в `main` она добавлена — ветка Vercel её не подхватила.
+2. Vercel переключился с `bun` на `pnpm`, а pnpm по умолчанию не «плоско» раскладывает зависимости. Rollup при SSR‑сборке TanStack Start не находит транзитивный `@tanstack/query-core`.
 
-Оба файла уже существуют (`public/sitemap.xml`, `public/robots.txt`) — не буду мигрировать на server-route, только обновлю содержимое:
-- **sitemap.xml**: пересоберу список URL точно по актуальным маршрутам и товарам из `data.ts` (уберу скрытые `hidden: true`, добавлю недостающие), обновлю `lastmod` на сегодня, добавлю `changefreq`.
-- **robots.txt**: оставлю `Allow: /`, `Disallow: /api/`, ссылку на `sitemap.xml`, добавлю блок `User-agent: Googlebot-Image Allow: /` и уберу возможные лишние.
+Плюс проект настроен под Cloudflare Workers (`wrangler.jsonc`, `@cloudflare/vite-plugin`, `src/server.ts` как SSR‑entry). На Vercel Nitro поднимает `nodejs24.x` — это работает, но нужно закрепить конфигурацию, иначе будущие сборки снова сломаются.
 
-## 3. Open Graph / Twitter Card / canonical на всех страницах
+## План правок (в `main`)
 
-Пройду по всем маршрутам (`about`, `contacts`, `delivery`, `laboratory`, `milling`, `promo`, `services`, `catalog.index`, `catalog.$slug`, `index`) и приведу `head()` к единому шаблону:
-- `title`, `description`
-- `og:title`, `og:description`, `og:type`, `og:url`, `og:locale=ru_RU`
-- `twitter:card=summary_large_image`, `twitter:title`, `twitter:description`
-- `<link rel="canonical" href="https://ddsmarket.ru/...">` — только на leaf-роуте, не в `__root`.
-- Для карточек товара — динамический canonical/og:url со slug'ом и JSON-LD `Product`.
+1. **`package.json`** — оставить `@tanstack/query-core` в `dependencies` (уже есть) и добавить `@vercel/speed-insights` (Vercel‑бот всё равно его подставит; лучше держать явно в main, чтобы не создавались параллельные ветки).
 
-`og:image` пока не ставлю (нет качественной обложки под share-preview) — можно добавить позже, если сгенерируем 1200×630.
+2. **`.npmrc`** (новый файл) — заставить pnpm поднимать вложенные зависимости, чтобы Rollup их видел:
+   ```
+   shamefully-hoist=true
+   node-linker=hoisted
+   ```
+   Это чинит `@tanstack/query-core` и подобные транзитивные импорты без правок кода.
 
-## 4. Оптимизация изображений и скорости
+3. **`vercel.json`** (новый файл) — зафиксировать команды и менеджер пакетов, чтобы Vercel не переключался туда‑сюда:
+   ```json
+   {
+     "installCommand": "pnpm install --no-frozen-lockfile",
+     "buildCommand": "pnpm run build",
+     "framework": null
+   }
+   ```
 
-- Подключу `vite-imagetools` в `vite.config.ts`. Для тяжёлых `.jpg/.png` в `src/assets/products/*` буду импортировать как `?format=webp;avif;jpg&as=picture` и рендерить через `<picture>` в карточке товара и галерее.
-- Ко всем `<img>` в каталоге, карточке товара, категориях и главной добавлю явные `width`/`height` (или `aspect-ratio` через контейнер уже есть) + `loading="lazy"` (у первого экрана — `loading="eager" fetchpriority="high"`).
-- Hero-видео: добавлю `poster` (лёгкий webp), уже стоит `preload="metadata"`.
-- Preload LCP-изображения главной страницы через `head().links` роута `/`.
-- Уберу неиспользуемые импорты, где найду.
+4. **Speed Insights** — подключить один раз в `src/routes/__root.tsx` (компонент `<SpeedInsights />` из `@vercel/speed-insights/react`), чтобы Vercel‑бот больше не открывал авто‑PR.
 
-## 5. Правки контента (data.ts)
+5. **Лог‑чек после мержа** — попросить пользователя в Vercel Dashboard:
+   - выбрать Production Branch = `main`,
+   - удалить старую ветку `vercel/install-vercel-speed-insights-sammzv` или сделать Redeploy последнего коммита `main`,
+   - в Settings → Build & Development оставить пустые команды (возьмутся из `vercel.json`).
 
-**5.1. `xtcera-x-mill-500-se`** — заменю поле `description` (и `short` при необходимости) на новый уникальный текст, который ты прислал, с маркированным списком «Особенности».
+## Что НЕ меняем
 
-**5.2. `xtcera-x-mill-500-plus`** — вычищу все упоминания «cadcamgo» из `description`/`short`/`features`; выставлю `price: "1 390 000 ₽"`.
+- `wrangler.jsonc`, `src/server.ts`, `@cloudflare/vite-plugin` — оставляем, сайт продолжит работать и на Lovable (Cloudflare), и на Vercel параллельно.
+- Никаких правок в `routeTree.gen.ts`, роутах, контент/SEO — эта задача только про деплой.
 
-**5.3. `dust-collector-srefo-r407`** — `price: "92 000 ₽"` (уточни: 92 000 ₽ или именно «92»? Предполагаю 92 000 ₽ по аналогии с R-412).
+## Проверка
 
-**5.4. `dust-collector-srefo-r412`** — `price: "77 000 ₽"`.
-
-**5.5. Категория «Печи спекания и обжига керамики» → «Печи для синтеризации и обжига»**
-- Переименую в массиве `CATEGORIES` и во всех товарах (`category: "..."`), а также в `CATEGORY_ICONS` на главной.
-
-**5.6. `zetin-ztcf-30b-sic`** — заменю `description` на новый текст с блоками «Особенности» и «Ключевые преимущества», категорию — на новую.
-
-## 6. Что попрошу сделать вручную
-
-- В DNS/хостинге настроить 301-редирект `www.ddsmarket.ru → ddsmarket.ru` (в выдаче Google сейчас `www.` — сигналы делятся между двумя хостами).
-- В Google Search Console: добавить оба свойства, отправить главную на переобход.
-
-## Файлы, которые изменю
-
-- `public/favicon.ico`, `public/favicon.png`, `public/favicon-16.png`, `public/favicon-32.png`, `public/apple-touch-icon.png`
-- `public/sitemap.xml`, `public/robots.txt`
-- `src/routes/__root.tsx` (head links)
-- `src/routes/index.tsx`, `about.tsx`, `contacts.tsx`, `delivery.tsx`, `laboratory.tsx`, `milling.tsx`, `promo.tsx`, `services.tsx`, `catalog.index.tsx`, `catalog.$slug.tsx` (OG/Twitter/canonical/JSON-LD)
-- `src/components/site/data.ts` (тексты, цены, категория)
-- `vite.config.ts` (+ `vite-imagetools`)
-- Карточка товара и галерея в `catalog.index.tsx` / `catalog.$slug.tsx` (переход на `<picture>` + width/height/lazy)
-
-## Один вопрос перед стартом
-
-Насчёт favicon: у тебя `logo.png` — это лого с текстом «DDS MARKET». Что вырезать в квадратную иконку?
-— **A)** Центральный графический значок из существующего лого (если он есть).
-— **B)** Сгенерировать новую монограмму «DDS» в фирменном цвете на белом фоне.
-— **C)** Использовать просто «D» в круге.
-
-Скажи букву — и я запускаю всё выше одним заходом.
+После пуша в `main` Vercel запустит новый билд. Ожидаем: `vite build` проходит, Nitro собирает `nodejs24.x` бандл, сайт открывается на `dds-market-*.vercel.app`. Если снова падение — прислать первые 40 строк ошибки из Build Logs.
