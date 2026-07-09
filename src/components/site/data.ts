@@ -643,7 +643,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-b52",
  name: "Cradle B52",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "2 620 000 ₽",
  short: "5-осевой Cradle B52 с шпинделем Jäger (DE) и сервоприводами Panasonic (JP). Магазин 15 фрез, точность <0,01 мм. Для титановых балок, Premill и CoCr-каркасов.",
  features: [
