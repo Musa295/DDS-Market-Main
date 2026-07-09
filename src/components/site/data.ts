@@ -502,7 +502,8 @@ export const PRODUCTS: Product[] = [
  slug: "blz-mo200",
  name: "BLZ Tech Dental BLZ MO200",
  category: "Фрезерные станки",
- brand: "BLZ Tech Dental",
+  brand: "BLZ Tech Dental",
+  hidden: true,
  price: "1 251 000 ₽",
  short: "5-осевой BLZ MO200 с автокалибровкой, шпинделем 2,5 кВт, держателем C-CLAMP и магазином на 12 фрез. Решение начального уровня для лабораторий.",
  features: [
