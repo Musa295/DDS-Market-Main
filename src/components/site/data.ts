@@ -575,7 +575,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-a52dw",
  name: "Cradle A52DW",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "1 450 000 ₽",
  short: "5-осевой Cradle A52DW — расширенная версия A52. По импортным данным: мощность 1,0 кВт, шпиндель до 80 000 об/мин.",
  features: [
