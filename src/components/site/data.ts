@@ -502,7 +502,8 @@ export const PRODUCTS: Product[] = [
  slug: "blz-mo200",
  name: "BLZ Tech Dental BLZ MO200",
  category: "Фрезерные станки",
- brand: "BLZ Tech Dental",
+  brand: "BLZ Tech Dental",
+  hidden: true,
  price: "1 251 000 ₽",
  short: "5-осевой BLZ MO200 с автокалибровкой, шпинделем 2,5 кВт, держателем C-CLAMP и магазином на 12 фрез. Решение начального уровня для лабораторий.",
  features: [
@@ -537,7 +538,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-a52",
  name: "Cradle A52",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "1 350 000 ₽",
  short: "5-осевой Cradle A52 для сухой обработки циркония, PMMA, PEEK и воска. Шпиндель 60 000 об/мин, точность <0,01 мм, диски Ø98,5 мм высотой 10–30 мм.",
  features: [
@@ -575,7 +577,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-a52dw",
  name: "Cradle A52DW",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "1 450 000 ₽",
  short: "5-осевой Cradle A52DW — расширенная версия A52. По импортным данным: мощность 1,0 кВт, шпиндель до 80 000 об/мин.",
  features: [
@@ -604,7 +607,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-b42",
  name: "Cradle B42",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "1 500 000 ₽",
  short: "4-осевой Cradle B42 для Premill-абатментов и стеклокерамики. Шпиндель 60 000 об/мин, водяное охлаждение, магазин 15 фрез, точность <0,01 мм.",
  features: [
@@ -643,7 +647,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-b52",
  name: "Cradle B52",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "2 620 000 ₽",
  short: "5-осевой Cradle B52 с шпинделем Jäger (DE) и сервоприводами Panasonic (JP). Магазин 15 фрез, точность <0,01 мм. Для титановых балок, Premill и CoCr-каркасов.",
  features: [
@@ -683,7 +688,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-b52se",
  name: "Cradle B52SE",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "2 350 000 ₽",
  short: "5-осевой Cradle B52SE с сервоприводами, шпинделем и электроникой собственной разработки Cradle. Магазин 15 фрез, точность <0,01 мм.",
  features: [
