@@ -1,51 +1,32 @@
-## Что происходит
+````text
+Цель: в каталоге «Фрезерные станки» оставить видимыми только модели XTCERA, остальные временно скрыть (чтобы можно было быстро вернуть позже).
+````
 
-Vercel собирает ветку `vercel/install-vercel-speed-insights-sammzv` (авто‑PR от Vercel‑бота с добавлением Speed Insights). Билд падает:
+### Изменения
 
-```
-[vite]: Rollup failed to resolve import "@tanstack/query-core"
-from ".../@tanstack/react-query/build/modern/index.js"
-```
+1. **Обновить `src/components/site/data.ts`**  
+   Добавить `hidden: true` в карточки шести не-XTCERA станков:
+   - BLZ Tech Dental BLZ MO200
+   - Cradle A52
+   - Cradle A52DW
+   - Cradle B42
+   - Cradle B52
+   - Cradle B52SE
 
-Две причины сразу:
+   Все станки XTCERA остаются без `hidden` (видимы):
+   - XTCERA X-Mill 500 Pro
+   - XTCERA X-Mill 500 SE
+   - XTCERA X-Mill 500 Plus
+   - XTCERA X-Mill 600SE
+   - XTCERA X-Mill 630
+   - XTCERA X-Mill 650SE
 
-1. На этой ветке `package.json` не содержит явной зависимости `@tanstack/query-core` (в логах установленных пакетов её нет). У нас в `main` она добавлена — ветка Vercel её не подхватила.
-2. Vercel переключился с `bun` на `pnpm`, а pnpm по умолчанию не «плоско» раскладывает зависимости. Rollup при SSR‑сборке TanStack Start не находит транзитивный `@tanstack/query-core`.
+2. **Проверить фильтрацию**  
+   `src/routes/catalog.index.tsx` уже исключает `hidden` товары из списка. После изменения в категории «Фрезерные станки» останутся только XTCERA, а карточка на главной в разделе «Категории оборудования» тоже будет вести на отфильтрованный вид.
 
-Плюс проект настроен под Cloudflare Workers (`wrangler.jsonc`, `@cloudflare/vite-plugin`, `src/server.ts` как SSR‑entry). На Vercel Nitro поднимает `nodejs24.x` — это работает, но нужно закрепить конфигурацию, иначе будущие сборки снова сломаются.
+3. **Проверить сборку**  
+   Запустить `bun run build` и убедиться, что TypeScript проходит без ошибок.
 
-## План правок (в `main`)
+### Как вернуть скрытые позднее
 
-1. **`package.json`** — оставить `@tanstack/query-core` в `dependencies` (уже есть) и добавить `@vercel/speed-insights` (Vercel‑бот всё равно его подставит; лучше держать явно в main, чтобы не создавались параллельные ветки).
-
-2. **`.npmrc`** (новый файл) — заставить pnpm поднимать вложенные зависимости, чтобы Rollup их видел:
-   ```
-   shamefully-hoist=true
-   node-linker=hoisted
-   ```
-   Это чинит `@tanstack/query-core` и подобные транзитивные импорты без правок кода.
-
-3. **`vercel.json`** (новый файл) — зафиксировать команды и менеджер пакетов, чтобы Vercel не переключался туда‑сюда:
-   ```json
-   {
-     "installCommand": "pnpm install --no-frozen-lockfile",
-     "buildCommand": "pnpm run build",
-     "framework": null
-   }
-   ```
-
-4. **Speed Insights** — подключить один раз в `src/routes/__root.tsx` (компонент `<SpeedInsights />` из `@vercel/speed-insights/react`), чтобы Vercel‑бот больше не открывал авто‑PR.
-
-5. **Лог‑чек после мержа** — попросить пользователя в Vercel Dashboard:
-   - выбрать Production Branch = `main`,
-   - удалить старую ветку `vercel/install-vercel-speed-insights-sammzv` или сделать Redeploy последнего коммита `main`,
-   - в Settings → Build & Development оставить пустые команды (возьмутся из `vercel.json`).
-
-## Что НЕ меняем
-
-- `wrangler.jsonc`, `src/server.ts`, `@cloudflare/vite-plugin` — оставляем, сайт продолжит работать и на Lovable (Cloudflare), и на Vercel параллельно.
-- Никаких правок в `routeTree.gen.ts`, роутах, контент/SEO — эта задача только про деплой.
-
-## Проверка
-
-После пуша в `main` Vercel запустит новый билд. Ожидаем: `vite build` проходит, Nitro собирает `nodejs24.x` бандл, сайт открывается на `dds-market-*.vercel.app`. Если снова падение — прислать первые 40 строк ошибки из Build Logs.
+Удалить строку `hidden: true` у нужных карточек — товары снова появятся в каталоге.
