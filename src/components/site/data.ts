@@ -537,7 +537,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-a52",
  name: "Cradle A52",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "1 350 000 ₽",
  short: "5-осевой Cradle A52 для сухой обработки циркония, PMMA, PEEK и воска. Шпиндель 60 000 об/мин, точность <0,01 мм, диски Ø98,5 мм высотой 10–30 мм.",
  features: [
