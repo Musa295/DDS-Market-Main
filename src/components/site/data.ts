@@ -604,7 +604,8 @@ export const PRODUCTS: Product[] = [
  slug: "cradle-b42",
  name: "Cradle B42",
  category: "Фрезерные станки",
- brand: "Cradle",
+  brand: "Cradle",
+  hidden: true,
  price: "1 500 000 ₽",
  short: "4-осевой Cradle B42 для Premill-абатментов и стеклокерамики. Шпиндель 60 000 об/мин, водяное охлаждение, магазин 15 фрез, точность <0,01 мм.",
  features: [
