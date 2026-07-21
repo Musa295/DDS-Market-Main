@@ -832,11 +832,12 @@ export const PRODUCTS: Product[] = [
 
  // ===== 3D-сканеры =====
  {
- slug: "scanner-blz-ls100",
- name: "BLZ LS100",
- category: "3D-сканеры",
- brand: "BLZ Tech Dental",
- price: "397 000 ₽",
+  slug: "scanner-blz-ls100",
+  name: "BLZ LS100",
+  category: "3D-сканеры",
+  brand: "BLZ Tech Dental",
+  hidden: true,
+  price: "397 000 ₽",
  short: "Лабораторный 3D-сканер BLZ LS100 начального уровня.",
  features: [
  "Лабораторный 3D-сканер",
@@ -859,11 +860,12 @@ export const PRODUCTS: Product[] = [
  inStock: true,
  },
  {
- slug: "scanner-blz-ls200-plus",
- name: "BLZ LS200 Plus",
- category: "3D-сканеры",
- brand: "BLZ Tech Dental",
- price: "497 000 ₽",
+  slug: "scanner-blz-ls200-plus",
+  name: "BLZ LS200 Plus",
+  category: "3D-сканеры",
+  brand: "BLZ Tech Dental",
+  hidden: true,
+  price: "497 000 ₽",
  short: "Лабораторный 3D-сканер BLZ LS200 Plus: 2 камеры по 5,6 Мп, точность <5 мкм, сканирование арки за 20 секунд, True Color и A.I. Extract.",
  features: [
  "2 камеры по 5,6 Мп, True Color",
