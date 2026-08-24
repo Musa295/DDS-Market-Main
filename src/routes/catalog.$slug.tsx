@@ -48,7 +48,7 @@ export const Route = createFileRoute("/catalog/$slug")({
     <PageShell title="Товар не найден" crumbs={[{ label: "Каталог", to: "/catalog" }, { label: "Не найден" }]}>
       <div className="container mx-auto px-6 py-20 text-center">
         <p className="text-muted-foreground mb-6">Запрошенный товар отсутствует в каталоге.</p>
-        <Button asChild><Link to="/catalog">Вернуться в каталог</Link></Button>
+        <Button asChild><Link to="/catalog" search={{ q: "", cat: "" }}>Вернуться в каталог</Link></Button>
       </div>
     </PageShell>
   ),
