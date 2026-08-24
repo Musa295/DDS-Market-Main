@@ -67,7 +67,7 @@ function Index() {
             Сканеры, фрезерные станки, 3D-принтеры, печи и ПО от ведущих мировых производителей. Полный цикл — от подбора до сервиса.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg"><Link to="/catalog">Перейти в каталог <ArrowRight className="size-4" /></Link></Button>
+            <Button asChild size="lg"><Link to="/catalog" search={{ q: "", cat: "" }}>Перейти в каталог <ArrowRight className="size-4" /></Link></Button>
             <Button asChild size="lg" variant="outline" className="bg-white/10 backdrop-blur border-white/40 text-white hover:bg-white hover:text-foreground"><Link to="/contacts">Получить консультацию</Link></Button>
           </div>
         </div>
@@ -83,7 +83,7 @@ function Index() {
             <div className="text-sm font-medium text-primary uppercase tracking-wider">Каталог</div>
             <h2 className="font-display text-3xl md:text-4xl font-bold mt-2">Категории оборудования</h2>
           </div>
-          <Link to="/catalog" className="text-primary font-medium hover:underline inline-flex items-center gap-1">Весь каталог <ArrowRight className="size-4" /></Link>
+          <Link to="/catalog" search={{ q: "", cat: "" }} className="text-primary font-medium hover:underline inline-flex items-center gap-1">Весь каталог <ArrowRight className="size-4" /></Link>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {CATEGORIES.map((cat) => {
@@ -106,7 +106,7 @@ function Index() {
         <div className="container mx-auto px-6">
           <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
             <h2 className="font-display text-3xl md:text-4xl font-bold">Популярное оборудование</h2>
-            <Link to="/catalog" className="text-primary font-medium hover:underline">Все товары →</Link>
+            <Link to="/catalog" search={{ q: "", cat: "" }} className="text-primary font-medium hover:underline">Все товары →</Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PRODUCTS.filter((p) => !p.hidden).slice(0, 6).map((p) => (
