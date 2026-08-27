@@ -587,7 +587,6 @@ export const PRODUCTS: Product[] = [
   name: "BLZ LS200 Plus",
   category: "3D-сканеры",
   brand: "BLZ Tech Dental",
-  hidden: true,
   price: "497 000 ₽",
  short: "Лабораторный 3D-сканер BLZ LS200 Plus: 2 камеры по 5,6 Мп, точность <5 мкм, сканирование арки за 20 секунд, True Color и A.I. Extract.",
  features: [
