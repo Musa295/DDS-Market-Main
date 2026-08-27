@@ -5,7 +5,7 @@ import { SITE } from "@/components/site/data";
 
 export const Route = createFileRoute("/delivery")({
   head: () => ({ meta: [
-    { title: "Доставка и оплата — Digital Dentistry Solutions" },
+    { title: "Доставка и оплата — DDS MARKET" },
     { name: "description", content: "Самовывоз и доставка транспортными компаниями: MagicTrans, ПЭК, Деловые линии, СДЭК. Оплата наличными в офисе, переводом, лизинг через партнёров." },
     { property: "og:title", content: "Доставка и оплата — DDS MARKET" },
     { property: "og:description", content: "Самовывоз со склада в Москве и доставка по всей России. Оплата наличными, переводом, лизинг." },

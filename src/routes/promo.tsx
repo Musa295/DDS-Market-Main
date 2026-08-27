@@ -11,7 +11,7 @@ const PROMOS = [
 
 export const Route = createFileRoute("/promo")({
   head: () => ({ meta: [
-    { title: "Акции — Digital Dentistry Solutions" },
+    { title: "Акции — DDS MARKET" },
     { name: "description", content: "Актуальные акции и спецпредложения на стоматологическое оборудование и расходные материалы." },
     { property: "og:title", content: "Акции и спецпредложения — DDS MARKET" },
     { property: "og:description", content: "Актуальные акции и спецпредложения на стоматологическое оборудование и расходные материалы." },

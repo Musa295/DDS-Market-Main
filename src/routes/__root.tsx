@@ -76,7 +76,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Digital Dentistry Solutions — стоматологическое оборудование в Москве" },
       { name: "description", content: "Поставка, монтаж и сервис цифрового стоматологического оборудования: сканеры, фрезерные станки, 3D-принтеры, печи, ПО." },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "DDS Market — Digital Dentistry Solutions" },
+      { property: "og:site_name", content: "DDS Market — DDS MARKET" },
       { property: "og:locale", content: "ru_RU" },
       { property: "og:title", content: "Digital Dentistry Solutions — стоматологическое оборудование в Москве" },
       { property: "og:description", content: "Поставка, монтаж и сервис цифрового стоматологического оборудования: сканеры, фрезерные станки, 3D-принтеры, печи, ПО." },
@@ -106,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "DDS Market — Digital Dentistry Solutions",
+          name: "DDS Market — DDS MARKET",
           url: "https://ddsmarket.ru",
           logo: "https://ddsmarket.ru/favicon.png",
           description: "Поставка, монтаж и сервис цифрового стоматологического оборудования в Москве: сканеры, фрезерные станки, 3D-принтеры, печи.",
