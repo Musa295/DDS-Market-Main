@@ -32,8 +32,8 @@
   --color-ring-offset-background: var(--background);
   --color-surface: var(--surface);
   --color-ink: var(--ink);
-  --font-display: "Manrope", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Manrope", "Manrope Fallback", system-ui, sans-serif;
+  --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
 }
 
 :root {
