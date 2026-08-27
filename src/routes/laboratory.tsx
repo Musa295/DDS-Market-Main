@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/laboratory")({
   head: () => ({ meta: [
-    { title: "Зуботехническая лаборатория — Digital Dentistry Solutions" },
+    { title: "Зуботехническая лаборатория — DDS MARKET" },
     { name: "description", content: "Цифровая зуботехническая лаборатория в Москве: коронки, виниры, импланты, бюгели, элайнеры." },
     { property: "og:title", content: "Зуботехническая лаборатория — DDS MARKET" },
     { property: "og:description", content: "Цифровая зуботехническая лаборатория в Москве: коронки, виниры, импланты, бюгели, элайнеры." },

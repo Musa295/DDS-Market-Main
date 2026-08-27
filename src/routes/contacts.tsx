@@ -10,13 +10,13 @@ const TG_CHAT_ID = "8947129651";
 
 export const Route = createFileRoute("/contacts")({
   head: () => ({ meta: [
-    { title: "Контакты — Digital Dentistry Solutions" },
+    { title: "Контакты — DDS MARKET" },
     { name: "description", content: "Адрес офиса в Москве, телефон, email, Telegram, WhatsApp, MAX." },
-    { property: "og:title", content: "Контакты — Digital Dentistry Solutions" },
+    { property: "og:title", content: "Контакты — DDS MARKET" },
     { property: "og:description", content: "Адрес офиса в Москве, телефон, email, Telegram, WhatsApp, MAX." },
     { property: "og:url", content: "https://ddsmarket.ru/contacts" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Контакты — Digital Dentistry Solutions" },
+      { name: "twitter:title", content: "Контакты — DDS MARKET" },
       { name: "twitter:description", content: "Адрес офиса в Москве, телефон, email, Telegram, WhatsApp, MAX." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/contacts" }]}),
   component: ContactsPage,

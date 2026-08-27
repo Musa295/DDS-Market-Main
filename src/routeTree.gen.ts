@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PromoRouteImport } from './routes/promo'
 import { Route as MillingRouteImport } from './routes/milling'
@@ -20,6 +21,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogIndexRouteImport } from './routes/catalog.index'
 import { Route as CatalogSlugRouteImport } from './routes/catalog.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/milling': typeof MillingRoute
   '/promo': typeof PromoRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalog/$slug': typeof CatalogSlugRoute
   '/catalog/': typeof CatalogIndexRoute
 }
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/milling': typeof MillingRoute
   '/promo': typeof PromoRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalog/$slug': typeof CatalogSlugRoute
   '/catalog': typeof CatalogIndexRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/milling': typeof MillingRoute
   '/promo': typeof PromoRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalog/$slug': typeof CatalogSlugRoute
   '/catalog/': typeof CatalogIndexRoute
 }
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/milling'
     | '/promo'
     | '/services'
+    | '/sitemap.xml'
     | '/catalog/$slug'
     | '/catalog/'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/milling'
     | '/promo'
     | '/services'
+    | '/sitemap.xml'
     | '/catalog/$slug'
     | '/catalog'
   id:
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/milling'
     | '/promo'
     | '/services'
+    | '/sitemap.xml'
     | '/catalog/$slug'
     | '/catalog/'
   fileRoutesById: FileRoutesById
@@ -156,12 +168,20 @@ export interface RootRouteChildren {
   MillingRoute: typeof MillingRoute
   PromoRoute: typeof PromoRoute
   ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CatalogSlugRoute: typeof CatalogSlugRoute
   CatalogIndexRoute: typeof CatalogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   MillingRoute: MillingRoute,
   PromoRoute: PromoRoute,
   ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CatalogSlugRoute: CatalogSlugRoute,
   CatalogIndexRoute: CatalogIndexRoute,
 }

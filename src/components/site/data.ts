@@ -54,6 +54,10 @@ import xtcera500plus1 from "@/assets/products/xtcera-x-mill-500plus-1.webp";
 import xtcera500plus2 from "@/assets/products/xtcera-x-mill-500plus-2.png";
 import xtcera500plus3 from "@/assets/products/xtcera-x-mill-500plus-3.jpg";
 import xtcera500plus4 from "@/assets/products/xtcera-x-mill-500plus-4.jpg";
+import xtcera500se1 from "@/assets/products/xtcera-x-mill-500se-1.jpg";
+import xtcera500se2 from "@/assets/products/xtcera-x-mill-500se-2.jpg";
+import xtcera500se3 from "@/assets/products/xtcera-x-mill-500se-3.jpg";
+import xtcera500se4 from "@/assets/products/xtcera-x-mill-500se-4.png";
 import cradleB52se1 from "@/assets/products/cradle-b52se-1.png";
 import cradleB52se2 from "@/assets/products/cradle-b52se-2.png";
 import cradleB52se3 from "@/assets/products/cradle-b52se-3.jpg";
@@ -75,9 +79,6 @@ import zetin30bSic3 from "@/assets/products/zetin-30b-sic-3.jpg";
 import upceraGt1Pro1 from "@/assets/products/upcera-gt1-pro-1.jpg";
 import upceraGt1Pro2 from "@/assets/products/upcera-gt1-pro-2.jpg";
 import upceraGt1Pro3 from "@/assets/products/upcera-gt1-pro-3.jpg";
-import upceraGt1_1 from "@/assets/products/upcera-gt1-1.jpg";
-import upceraGt1_2 from "@/assets/products/upcera-gt1-2.jpg";
-import upceraGt1_3 from "@/assets/products/upcera-gt1-3.jpg";
 import upceraA7plus1 from "@/assets/products/upcera-a7plus-1.jpg";
 import upceraA7plus2 from "@/assets/products/upcera-a7plus-2.jpg";
 import upceraA7pro1 from "@/assets/products/upcera-a7pro-1.jpg";
@@ -232,7 +233,7 @@ export const PRODUCTS: Product[] = [
  name: "XTCERA X-Mill 500 Pro",
  category: "Фрезерные станки",
  brand: "XTCERA",
- price: "1 550 000 ₽",
+ price: "1 490 000 ₽",
  short: "5-осевой фрезерный станок XTCERA X-Mill 500 Pro для сухой обработки диоксида циркония, воска, PMMA и синтеризуемых сплавов Co-Cr. Шпиндель 1,8 кВт / 60 000 об/мин, магазин на 10 фрез, ПО hyperDENT.",
  features: [
  "5 осей, рабочая область XYZ 220 / 160 / 120 мм",
@@ -267,6 +268,35 @@ export const PRODUCTS: Product[] = [
   { label: "Комплектация", value: "3 быстросъёмных холдера 98 мм, подставка" },
   ],
  },
+  {
+    slug: "xtcera-x-mill-500-se",
+    name: "XTCERA X-Mill 500 SE",
+    category: "Фрезерные станки",
+    brand: "XTCERA",
+    price: "2 500 000 ₽",
+    short: "Компактный 5-осевой CAD/CAM-фрезерный станок XTCERA X-Mill 500 SE для сухой обработки диоксида циркония, PMMA и воска.",
+    features: [
+      "5 осей, сухая обработка",
+      "Диоксид циркония, PMMA, воск",
+      "Прецизионные винтовые направляющие",
+      "Контроль износа и поломки инструмента",
+    ],
+    image: xtcera500se1,
+    images: [xtcera500se1, xtcera500se2, xtcera500se3, xtcera500se4],
+    description: [
+      "XTCERA X-Mill 500 SE — компактный 5-осевой CAD/CAM-фрезерный станок для сухой обработки диоксида циркония, PMMA и воска. Пятиосевая кинематика позволяет изготавливать коронки, мосты и каркасы, включая участки с поднутрениями. Линейные оси построены на прецизионных винтовых направляющих, поворотные — на высокоточных редукторах.",
+      "Предусмотрен контроль состояния режущего инструмента и подключение к системе XMill Monitor для дистанционного контроля производственного процесса.",
+    ],
+    specs: [
+      { label: "Тип", value: "5-осевой CAD/CAM фрезерный станок" },
+      { label: "Количество осей", value: "5" },
+      { label: "Тип обработки", value: "Сухая" },
+      { label: "Материалы", value: "диоксид циркония, PMMA, воск" },
+      { label: "Контроль инструмента", value: "определение износа и поломки фрезы" },
+      { label: "Мониторинг", value: "XMill Monitor" },
+      { label: "Питание", value: "220 В, однофазный ток" },
+    ],
+  },
  {
  slug: "xtcera-x-mill-500-plus",
  name: "XTCERA X-Mill 500 Plus",
@@ -386,7 +416,7 @@ export const PRODUCTS: Product[] = [
  name: "XTCERA X-Mill 650SE",
  category: "Фрезерные станки",
  brand: "XTCERA",
- price: "2 850 000 ₽",
+ price: "2 700 000 ₽",
  short: "Профессиональный 5-осевой XTCERA X-Mill 650SE для мокрой обработки. Шпиндель 4 кВт, магазин на 36 инструментов, блоки 140×150 мм и диски 98 мм, точность 1 мкм.",
  features: [
  "Шпиндель 4 кВт, до 40 000 об/мин",
@@ -464,7 +494,7 @@ export const PRODUCTS: Product[] = [
  name: "FastForm DeskFab X1",
  category: "3D-принтеры по металлу (SLM)",
  brand: "FastForm",
- price: "2 460 000 ₽",
+ price: "2 400 000 ₽",
  short: "Настольный SLM-принтер FastForm DeskFab X1 — селективное лазерное плавление металлических порошков для лабораторий, стоматологий и малых производств.",
  features: [
  "Технология SLM (селективное лазерное плавление)",
@@ -992,32 +1022,6 @@ export const PRODUCTS: Product[] = [
  { label: "Габариты (Г×Ш×В)", value: "565 × 310 × 585 мм" },
  { label: "Вес нетто", value: "50 кг" },
  { label: "Особенности", value: "Память при отключении питания, низкое энергопотребление, безопасный корпус" },
- ],
- },
- {
- slug: "upcera-vicce-gt1",
- name: "Vicce GT1",
- category: "Печи для синтеризации и обжига",
- brand: "Vicce",
- price: "370 000 ₽",
- short: "Скоростная печь Vicce GT1 для спекания циркония.",
- features: [
- "Скоростная печь спекания",
- "Платформа Vicce GT1",
- "Для зуботехнических лабораторий",
- ],
- image: upceraGt1_1,
- images: [upceraGt1_1, upceraGt1_2, upceraGt1_3],
- description: [
- "Vicce GT1 — скоростная печь для спекания циркония. Подходит лабораториям, которым важна короткая программа обжига при сохранении геометрии каркаса.",
- "• Платформа Vicce GT1 — скоростной обжиг циркониевых реставраций.",
- "• Подходит для типовых программ спекания однослойного и многослойного циркония.",
- "• Поставка с пусконаладкой и инструктажем оператора.",
- "• Подменный фонд на время сервисного обслуживания.",
- ],
- specs: [
- { label: "Тип", value: "Печь для спекания циркония" },
- { label: "Платформа", value: "Vicce GT1" },
  ],
  },
  {
@@ -2020,7 +2024,7 @@ export const PRODUCTS: Product[] = [
  name: "Аппарат для анодирования титана Srefo R-1207",
  category: "Аппараты для анодирования",
  brand: "Srefo",
- price: "95 000 ₽",
+ price: "65 000 ₽",
  short: "Лабораторная электрохимическая система Srefo R-1207 для обработки титановых стоматологических конструкций.",
  features: [
  "Электрохимическая обработка титана",

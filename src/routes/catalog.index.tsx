@@ -41,7 +41,7 @@ function ProductGallery({ product }: { product: Product }) {
 
 export const Route = createFileRoute("/catalog/")({
   head: () => ({ meta: [
-    { title: "Каталог оборудования — Digital Dentistry Solutions" },
+    { title: "Каталог оборудования — DDS MARKET" },
     { name: "description", content: "Каталог стоматологического оборудования: сканеры, фрезерные станки, 3D-принтеры, печи, ПО, расходные материалы." },
     { property: "og:title", content: "Каталог стоматологического оборудования — DDS MARKET" },
     { property: "og:description", content: "Сканеры, фрезерные станки, 3D-принтеры, печи, ПО и расходные материалы. Цены ниже конкурентов." },

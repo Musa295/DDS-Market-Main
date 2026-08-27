@@ -5,7 +5,7 @@ import { CheckCircle2, Cog } from "lucide-react";
 
 export const Route = createFileRoute("/milling")({
   head: () => ({ meta: [
-    { title: "Фрезерный центр — Digital Dentistry Solutions" },
+    { title: "Фрезерный центр — DDS MARKET" },
     { name: "description", content: "Собственный фрезерный центр в Москве: каркасы из циркония, диоксида кремния, PMMA, титана." },
     { property: "og:title", content: "Фрезерный центр — DDS MARKET Москва" },
     { property: "og:description", content: "Собственный фрезерный центр в Москве: каркасы из циркония, диоксида кремния, PMMA, титана." },

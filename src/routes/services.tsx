@@ -6,13 +6,13 @@ import { CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/services")({
   head: () => ({ meta: [
-    { title: "Услуги — Digital Dentistry Solutions" },
+    { title: "Услуги — DDS MARKET" },
     { name: "description", content: "Подбор оборудования, поставка, монтаж, обучение и сервисное обслуживание." },
-    { property: "og:title", content: "Услуги — Digital Dentistry Solutions" },
+    { property: "og:title", content: "Услуги — DDS MARKET" },
     { property: "og:description", content: "Подбор оборудования, поставка, монтаж, обучение и сервисное обслуживание." },
     { property: "og:url", content: "https://ddsmarket.ru/services" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Услуги — Digital Dentistry Solutions" },
+      { name: "twitter:title", content: "Услуги — DDS MARKET" },
       { name: "twitter:description", content: "Подбор оборудования, поставка, монтаж, обучение и сервисное обслуживание." },
   ], links: [{ rel: "canonical", href: "https://ddsmarket.ru/services" }]}),
   component: () => (
