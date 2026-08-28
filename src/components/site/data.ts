@@ -25,10 +25,9 @@ import blzLs200_1 from "@/assets/products/blz-ls200-1.webp";
 import blzLs200_2 from "@/assets/products/blz-ls200-2.webp";
 import blzLs200_3 from "@/assets/products/blz-ls200-3.webp";
 import blzLs200_4 from "@/assets/products/blz-ls200-4.webp";
-import denparkZ5_1 from "@/assets/products/denpark-z5-1.webp";
 import denparkZ5_2 from "@/assets/products/denpark-z5-2.webp";
-import denparkZ5_3 from "@/assets/products/denpark-z5-3.webp";
-import denparkZ5_4 from "@/assets/products/denpark-z5-4.webp";
+import denparkZ5_3 from "@/assets/products/denpark-z5-3.jpg";
+import denparkZ5_4 from "@/assets/products/denpark-z5-4.jpg";
 import denparkZ9_1 from "@/assets/products/denpark-z9-1.webp";
 import denparkZ9_2 from "@/assets/products/denpark-z9-2.webp";
 import denparkZ9_3 from "@/assets/products/denpark-z9-3.webp";
@@ -123,8 +122,8 @@ import srefoClean3 from "@/assets/products/srefo-r1206-clean-3.png";
 import rayshapeFilms1 from "@/assets/products/rayshape-films-set-1.jpg";
 import rayshapeFilms2 from "@/assets/products/rayshape-films-set-2.jpg";
 import rayshapeFilms3 from "@/assets/products/rayshape-films-set-3.webp";
-import rayshapeGrey1kg from "@/assets/products/rayshape-grey-1kg.webp";
-import rayshapeOrange1kg from "@/assets/products/rayshape-orange-1kg.webp";
+import rayshapeGrey1kg from "@/assets/products/rayshape-grey-1kg.jpg";
+import rayshapeOrange1kg from "@/assets/products/rayshape-orange-1kg.jpg";
 import sinoTi2White from "@/assets/products/new-sino-ti-2-white.jpg";
 import srefoR501_1 from "@/assets/products/srefo-r501-1.jpg";
 import srefoR502_1 from "@/assets/products/srefo-r502-1.jpg";
@@ -659,8 +658,8 @@ export const PRODUCTS: Product[] = [
  "Сканирование челюсти — 9 секунд",
  "Совместим с exocad",
  ],
- image: denparkZ5_1,
- images: [denparkZ5_1, denparkZ5_2, denparkZ5_3, denparkZ5_4],
+    image: denparkZ5_2,
+    images: [denparkZ5_2, denparkZ5_3, denparkZ5_4],
  description: [
  "DENPARK Z-5 — лабораторный 3D-сканер для оцифровки гипсовых моделей, оттисков и работы в CAD/CAM-цепочке. Компактный корпус и быстрая оцифровка — удобный вариант для лабораторий любого размера.",
  "• 2 камеры по 2,4 Мп, точность сканирования 6 микрон.",
