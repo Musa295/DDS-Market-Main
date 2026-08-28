@@ -50,7 +50,7 @@ import xtcera650se3 from "@/assets/products/xtcera-x-mill-650se-3.jpg";
 import xtcera650se4 from "@/assets/products/xtcera-x-mill-650se-4.jpg";
 import xtcera630a from "@/assets/products/xtcera-x-mill-630-1.jpg";
 import xtcera630b from "@/assets/products/xtcera-x-mill-630-2.jpg";
-import xtcera500plus1 from "@/assets/products/xtcera-x-mill-500plus-1.webp";
+import xtcera500plus1 from "@/assets/products/xtcera-x-mill-500plus-1.jpg";
 import xtcera500plus2 from "@/assets/products/xtcera-x-mill-500plus-2.png";
 import xtcera500plus3 from "@/assets/products/xtcera-x-mill-500plus-3.jpg";
 import xtcera500plus4 from "@/assets/products/xtcera-x-mill-500plus-4.jpg";
