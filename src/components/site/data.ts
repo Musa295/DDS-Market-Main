@@ -25,17 +25,16 @@ import blzLs200_1 from "@/assets/products/blz-ls200-1.webp";
 import blzLs200_2 from "@/assets/products/blz-ls200-2.webp";
 import blzLs200_3 from "@/assets/products/blz-ls200-3.webp";
 import blzLs200_4 from "@/assets/products/blz-ls200-4.webp";
-import denparkZ5_2 from "@/assets/products/denpark-z5-2.webp";
 import denparkZ5_3 from "@/assets/products/denpark-z5-3.jpg";
 import denparkZ5_4 from "@/assets/products/denpark-z5-4.jpg";
 import denparkZ9_1 from "@/assets/products/denpark-z9-1.webp";
 import denparkZ9_2 from "@/assets/products/denpark-z9-2.webp";
 import denparkZ9_3 from "@/assets/products/denpark-z9-3.webp";
-import srefoR407_1 from "@/assets/products/srefo-r407-1.webp";
-import srefoR407_2 from "@/assets/products/srefo-r407-2.webp";
-import srefoR407_3 from "@/assets/products/srefo-r407-3.webp";
+import srefoR407_1 from "@/assets/products/srefo-r407-1.jpg";
+import srefoR407_2 from "@/assets/products/srefo-r407-2.jpg";
+import srefoR407_3 from "@/assets/products/srefo-r407-3.jpg";
 // srefo-r407-4 image removed from R-407 gallery per client request
-import srefoR407_5 from "@/assets/products/srefo-r407-5.webp";
+import srefoR407_5 from "@/assets/products/srefo-r407-5.jpg";
 import srefoE402_1 from "@/assets/products/srefo-e402-1.webp";
 import srefoE402_2 from "@/assets/products/srefo-e402-2.webp";
 import srefoR412_1 from "@/assets/products/srefo-r412-1.webp";
@@ -658,8 +657,8 @@ export const PRODUCTS: Product[] = [
  "Сканирование челюсти — 9 секунд",
  "Совместим с exocad",
  ],
-    image: denparkZ5_2,
-    images: [denparkZ5_2, denparkZ5_3, denparkZ5_4],
+    image: denparkZ5_3,
+    images: [denparkZ5_3, denparkZ5_4],
  description: [
  "DENPARK Z-5 — лабораторный 3D-сканер для оцифровки гипсовых моделей, оттисков и работы в CAD/CAM-цепочке. Компактный корпус и быстрая оцифровка — удобный вариант для лабораторий любого размера.",
  "• 2 камеры по 2,4 Мп, точность сканирования 6 микрон.",
