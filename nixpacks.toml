@@ -2,10 +2,10 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm install"]
 
 [phases.build]
 cmds = ["npm run build"]
 
 [start]
-cmd = "PORT=5173 HOST=0.0.0.0 node .output/server/index.mjs"
+cmd = "npm run preview -- --host 0.0.0.0 --port 5173"
