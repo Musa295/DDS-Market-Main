@@ -8,4 +8,4 @@ cmds = ["npm ci"]
 cmds = ["npm run build"]
 
 [start]
-cmd = "npx serve dist -s -p 5173 -l 0.0.0.0"
+cmd = "PORT=5173 HOST=0.0.0.0 node .output/server/index.mjs"
