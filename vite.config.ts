@@ -4,17 +4,17 @@
 //     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({
-  preview: {
-    host: true,
-    port: 5173,
-    strictPort: true,
-    allowedHosts: [
-      'ddsmarket.ru',
-      'www.ddsmarket.ru',
-      'localhost',
-      '127.0.0.1'
-    ]
-  }, vite: { ... } }) if needed.
+//   preview: {
+//     host: true,
+//     port: 5173,
+//     strictPort: true,
+//     allowedHosts: [
+//       'ddsmarket.ru',
+//       'www.ddsmarket.ru',
+//       'localhost',
+//       '127.0.0.1'
+//     ]
+//   }, vite: { ... } }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
