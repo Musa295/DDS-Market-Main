@@ -33,6 +33,7 @@ function ContactsPage() {
   const [captcha, setCaptcha] = useState(genCaptcha);
   const [captchaInput, setCaptchaInput] = useState("");
   const [startTime] = useState(() => Date.now());
+  const [waText, setWaText] = useState("");
   return (
     <PageShell title="Контакты" subtitle="Свяжитесь с нами удобным способом — ответим в течение 30 минут в рабочее время." crumbs={[{ label: "Контакты" }]}>
       <div className="container mx-auto px-6 py-14 grid lg:grid-cols-2 gap-10">
@@ -140,7 +141,16 @@ function ContactsPage() {
           <Button type="submit" size="lg" className="w-full" disabled={status === "sending"}>
             {status === "sending" ? "Отправка…" : "Отправить"}
           </Button>
-          {status === "ok" && <p className="text-sm text-green-600 text-center">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>}
+          {status === "ok" && (
+            <div className="space-y-3">
+              <p className="text-sm text-green-600 text-center">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>
+              <Button type="button" variant="outline" size="lg" className="w-full" asChild>
+                <a href={`${SITE.whatsapp}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener noreferrer">
+                  Продублировать в WhatsApp
+                </a>
+              </Button>
+            </div>
+          )}
           {status === "captcha" && <p className="text-sm text-destructive text-center">Неверный ответ на проверку. Попробуйте ещё раз.</p>}
           {status === "err" && <p className="text-sm text-destructive text-center">Не удалось отправить. Позвоните нам: {SITE.phone}</p>}
           <p className="text-xs text-muted-foreground text-center">Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.</p>
