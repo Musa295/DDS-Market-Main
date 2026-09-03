@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 // Обработка заявок на любом хостинге: Dokploy, VPS, Lovable.
-// Токены берутся из переменных окружения, если они заданы на сервере.
-const FALLBACK_TG_TOKEN = "8604500241:AAGp-nHeaFuf84cCA2bHrfhabulDFkVbBgg";
-const FALLBACK_TG_CHAT_ID = "8947129651";
-const LEAD_EMAIL = "ddsmarket@mail.ru";
+// Все секреты — только из переменных окружения (никакого хардкода).
+const LEAD_EMAIL_DEFAULT = "ddsmarket@mail.ru";
 
 type Lead = { name?: string; phone?: string; email?: string; message?: string; source?: string };
 
@@ -25,8 +23,9 @@ function buildText(lead: Lead) {
 }
 
 async function sendTelegram(text: string) {
-  const token = process.env["TELEGRAM_BOT_TOKEN"] || FALLBACK_TG_TOKEN;
-  const chatId = process.env["TELEGRAM_CHAT_ID"] || FALLBACK_TG_CHAT_ID;
+  const token = process.env["TELEGRAM_BOT_TOKEN"];
+  const chatId = process.env["TELEGRAM_CHAT_ID"];
+  if (!token || !chatId) throw new Error("telegram not configured");
   const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -38,7 +37,7 @@ async function sendTelegram(text: string) {
 async function sendEmailCopy(text: string) {
   const apiKey = process.env["RESEND_API_KEY"];
   const from = process.env["LEAD_EMAIL_FROM"];
-  const to = process.env["LEAD_EMAIL_TO"] || LEAD_EMAIL;
+  const to = process.env["LEAD_EMAIL_TO"] || LEAD_EMAIL_DEFAULT;
   if (!apiKey || !from) return "skipped";
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -59,28 +58,31 @@ export const Route = createFileRoute("/api/public/lead")({
           return Response.json({ ok: false, error: "invalid json" }, { status: 400 });
         }
         const body = (raw ?? {}) as Record<string, unknown>;
-        if (clean(body.website)) return Response.json({ ok: true });
+        if (clean(body.website)) return Response.json({ ok: true, spam: true });
 
         const lead: Lead = {
           name: clean(body.name, 100),
           phone: clean(body.phone, 40),
           email: clean(body.email, 120),
           message: clean(body.message, 2000),
-          source: clean(body.source, 120),
+          source: clean(body.source, 200),
         };
         if (!lead.name || !lead.phone) {
           return Response.json({ ok: false, error: "name and phone are required" }, { status: 400 });
         }
 
         const text = buildText(lead);
+        const email = await sendEmailCopy(text).catch(() => "error");
         try {
           await sendTelegram(text);
         } catch (e) {
           console.error("lead telegram failed", e);
-          return Response.json({ ok: false, error: "telegram failed" }, { status: 502 });
+          if (email !== "sent") {
+            return Response.json({ ok: false, error: "delivery failed", email }, { status: 502 });
+          }
+          return Response.json({ ok: true, telegram: false, email });
         }
-        const email = await sendEmailCopy(text).catch(() => "error");
-        return Response.json({ ok: true, email });
+        return Response.json({ ok: true, telegram: true, email });
       },
     },
   },

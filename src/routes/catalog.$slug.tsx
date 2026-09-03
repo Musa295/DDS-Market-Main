@@ -3,6 +3,7 @@ import { PageShell } from "@/components/site/PageShell";
 import { PRODUCTS, SITE, DEFAULT_SPECS, type Product } from "@/components/site/data";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { submitLead } from "@/lib/lead";
 import { ChevronLeft, ChevronRight, Check, Phone, Mail, MessageCircle, Truck, ShieldCheck, Wrench, Package } from "lucide-react";
 
 export const Route = createFileRoute("/catalog/$slug")({
@@ -342,8 +343,6 @@ function ProductPage() {
   );
 }
 
-const TG_TOKEN = "8604500241:AAGp-nHeaFuf84cCA2bHrfhabulDFkVbBgg";
-const TG_CHAT_ID = "8947129651";
 
 function QuickInquiryForm({ productName, price }: { productName: string; price: string }) {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
@@ -355,18 +354,18 @@ function QuickInquiryForm({ productName, price }: { productName: string; price: 
         const name = String(fd.get("name") || "");
         const phone = String(fd.get("phone") || "");
         const comment = String(fd.get("comment") || "");
-        const text = `🛒 Заявка с карточки товара\n\n📦 Товар: ${productName}\n💰 Цена: ${price}\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n💬 Комментарий: ${comment || "—"}`;
         setStatus("sending");
-        try {
-          const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ chat_id: TG_CHAT_ID, text }),
-          });
-          if (!res.ok) throw new Error();
+        const form = e.currentTarget;
+        const ok = await submitLead({
+          name,
+          phone,
+          message: comment,
+          source: `Карточка товара: ${productName} (${price})`,
+        });
+        if (ok) {
           setStatus("ok");
-          (e.target as HTMLFormElement).reset();
-        } catch {
+          form.reset();
+        } else {
           setStatus("err");
         }
       }}
