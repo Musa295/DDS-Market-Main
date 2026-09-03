@@ -33,6 +33,7 @@ function ContactsPage() {
   const [captcha, setCaptcha] = useState(genCaptcha);
   const [captchaInput, setCaptchaInput] = useState("");
   const [startTime] = useState(() => Date.now());
+  const [waText, setWaText] = useState("");
   return (
     <PageShell title="Контакты" subtitle="Свяжитесь с нами удобным способом — ответим в течение 30 минут в рабочее время." crumbs={[{ label: "Контакты" }]}>
       <div className="container mx-auto px-6 py-14 grid lg:grid-cols-2 gap-10">
@@ -78,18 +79,38 @@ function ContactsPage() {
             const message = String(fd.get("message") || "");
             const text = `🦷 Новая заявка с сайта DDS MARKET\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n✉️ Email: ${email || "—"}\n💬 Сообщение: ${message || "—"}`;
             setStatus("sending");
+            setWaText(text);
+            // 1) серверный обработчик (работает на любом хостинге: Dokploy, VPS, Lovable)
+            let sent = false;
             try {
-              const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+              const res = await fetch("/api/public/lead", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ chat_id: TG_CHAT_ID, text }),
+                body: JSON.stringify({ name, phone, email, message, source: "Форма на странице «Контакты»" }),
               });
-              if (!res.ok) throw new Error();
+              sent = res.ok;
+            } catch {
+              sent = false;
+            }
+            // 2) резервная отправка напрямую в Telegram (если сервер недоступен, напр. статический хостинг)
+            if (!sent) {
+              try {
+                const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ chat_id: TG_CHAT_ID, text }),
+                });
+                sent = res.ok;
+              } catch {
+                sent = false;
+              }
+            }
+            if (sent) {
               setStatus("ok");
               form.reset();
               setCaptcha(genCaptcha());
               setCaptchaInput("");
-            } catch {
+            } else {
               setStatus("err");
             }
           }}
@@ -120,7 +141,16 @@ function ContactsPage() {
           <Button type="submit" size="lg" className="w-full" disabled={status === "sending"}>
             {status === "sending" ? "Отправка…" : "Отправить"}
           </Button>
-          {status === "ok" && <p className="text-sm text-green-600 text-center">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>}
+          {status === "ok" && (
+            <div className="space-y-3">
+              <p className="text-sm text-green-600 text-center">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>
+              <Button type="button" variant="outline" size="lg" className="w-full" asChild>
+                <a href={`${SITE.whatsapp}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener noreferrer">
+                  Продублировать в WhatsApp
+                </a>
+              </Button>
+            </div>
+          )}
           {status === "captcha" && <p className="text-sm text-destructive text-center">Неверный ответ на проверку. Попробуйте ещё раз.</p>}
           {status === "err" && <p className="text-sm text-destructive text-center">Не удалось отправить. Позвоните нам: {SITE.phone}</p>}
           <p className="text-xs text-muted-foreground text-center">Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.</p>
