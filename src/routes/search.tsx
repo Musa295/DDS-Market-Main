@@ -115,7 +115,7 @@ function SearchPage() {
           {qParam.trim() && results.length === 0 && (
             <div className="col-span-full p-10 text-center border border-dashed rounded-2xl text-muted-foreground">
               Ничего не найдено. Попробуйте изменить запрос или{" "}
-              <Link to="/catalog" className="text-primary underline-offset-4 hover:underline">откройте каталог</Link>.
+              <Link to="/catalog" search={{ q: "", cat: "" }} className="text-primary underline-offset-4 hover:underline">откройте каталог</Link>.
             </div>
           )}
         </div>

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as PromoRouteImport } from './routes/promo'
 import { Route as MillingRouteImport } from './routes/milling'
 import { Route as LaboratoryRouteImport } from './routes/laboratory'
@@ -31,6 +32,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromoRoute = PromoRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/laboratory': typeof LaboratoryRoute
   '/milling': typeof MillingRoute
   '/promo': typeof PromoRoute
+  '/search': typeof SearchRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalog/$slug': typeof CatalogSlugRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/laboratory': typeof LaboratoryRoute
   '/milling': typeof MillingRoute
   '/promo': typeof PromoRoute
+  '/search': typeof SearchRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalog/$slug': typeof CatalogSlugRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/laboratory': typeof LaboratoryRoute
   '/milling': typeof MillingRoute
   '/promo': typeof PromoRoute
+  '/search': typeof SearchRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalog/$slug': typeof CatalogSlugRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/milling'
     | '/promo'
+    | '/search'
     | '/services'
     | '/sitemap.xml'
     | '/catalog/$slug'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/milling'
     | '/promo'
+    | '/search'
     | '/services'
     | '/sitemap.xml'
     | '/catalog/$slug'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/milling'
     | '/promo'
+    | '/search'
     | '/services'
     | '/sitemap.xml'
     | '/catalog/$slug'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   LaboratoryRoute: typeof LaboratoryRoute
   MillingRoute: typeof MillingRoute
   PromoRoute: typeof PromoRoute
+  SearchRoute: typeof SearchRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CatalogSlugRoute: typeof CatalogSlugRoute
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/promo': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   LaboratoryRoute: LaboratoryRoute,
   MillingRoute: MillingRoute,
   PromoRoute: PromoRoute,
+  SearchRoute: SearchRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CatalogSlugRoute: CatalogSlugRoute,
