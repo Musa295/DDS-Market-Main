@@ -3,6 +3,7 @@ import { PageShell } from "@/components/site/PageShell";
 import { PRODUCTS, SITE, DEFAULT_SPECS, type Product } from "@/components/site/data";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { submitLead } from "@/lib/lead";
 import { ChevronLeft, ChevronRight, Check, Phone, Mail, MessageCircle, Truck, ShieldCheck, Wrench, Package } from "lucide-react";
 
 export const Route = createFileRoute("/catalog/$slug")({
