@@ -43,6 +43,13 @@ function resolveFile(urlPath) {
 }
 
 createServer((req, res) => {
+  const path = (req.url || "/").split("?")[0];
+  if (path === "/health" || path === "/healthz") {
+    const body = JSON.stringify({ status: "ok", service: "dds-market", time: new Date().toISOString() });
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(body);
+    return;
+  }
   const file = resolveFile(req.url || "/");
   const ext = extname(file);
   const isAsset = /^\/(assets|fonts)\//.test(req.url || "");
