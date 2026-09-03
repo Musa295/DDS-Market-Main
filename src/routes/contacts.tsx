@@ -4,9 +4,8 @@ import { PageShell } from "@/components/site/PageShell";
 import { SITE } from "@/components/site/data";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Send, MessageCircle, Clock, Zap } from "lucide-react";
+import { submitLead, buildLeadText } from "@/lib/lead";
 
-const TG_TOKEN = "8604500241:AAGp-nHeaFuf84cCA2bHrfhabulDFkVbBgg";
-const TG_CHAT_ID = "8947129651";
 
 export const Route = createFileRoute("/contacts")({
   head: () => ({ meta: [
@@ -77,34 +76,11 @@ function ContactsPage() {
             const phone = String(fd.get("phone") || "");
             const email = String(fd.get("email") || "");
             const message = String(fd.get("message") || "");
-            const text = `🦷 Новая заявка с сайта DDS MARKET\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n✉️ Email: ${email || "—"}\n💬 Сообщение: ${message || "—"}`;
+            const source = "Форма на странице «Контакты»";
+            const text = buildLeadText({ name, phone, email, message, source });
             setStatus("sending");
             setWaText(text);
-            // 1) серверный обработчик (работает на любом хостинге: Dokploy, VPS, Lovable)
-            let sent = false;
-            try {
-              const res = await fetch("/api/public/lead", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, phone, email, message, source: "Форма на странице «Контакты»" }),
-              });
-              sent = res.ok;
-            } catch {
-              sent = false;
-            }
-            // 2) резервная отправка напрямую в Telegram (если сервер недоступен, напр. статический хостинг)
-            if (!sent) {
-              try {
-                const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ chat_id: TG_CHAT_ID, text }),
-                });
-                sent = res.ok;
-              } catch {
-                sent = false;
-              }
-            }
+            const sent = await submitLead({ name, phone, email, message, source });
             if (sent) {
               setStatus("ok");
               form.reset();
@@ -152,7 +128,19 @@ function ContactsPage() {
             </div>
           )}
           {status === "captcha" && <p className="text-sm text-destructive text-center">Неверный ответ на проверку. Попробуйте ещё раз.</p>}
-          {status === "err" && <p className="text-sm text-destructive text-center">Не удалось отправить. Позвоните нам: {SITE.phone}</p>}
+          {status === "err" && (
+            <div className="space-y-3">
+              <p className="text-sm text-destructive text-center">Не удалось отправить автоматически. Отправьте заявку в мессенджер или позвоните: {SITE.phone}</p>
+              <div className="grid grid-cols-2 gap-3">
+                <Button type="button" variant="outline" asChild>
+                  <a href={`${SITE.whatsapp}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                </Button>
+                <Button type="button" variant="outline" asChild>
+                  <a href={SITE.telegram} target="_blank" rel="noopener noreferrer">Telegram</a>
+                </Button>
+              </div>
+            </div>
+          )}
           <p className="text-xs text-muted-foreground text-center">Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.</p>
         </form>
       </div>
